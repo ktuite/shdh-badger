@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>Sign In to SHDH</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='semantic.css') }}">
+
+    <script src="{{ url_for('static', filename='jquery-1.12.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='semantic.js') }}"></script>
+
+
+    <style type="text/css">
+        body {
+            background-color: #DADADA;
+        }
+        body > .grid {
+            height: 100%;
+        }
+        #badgePreview {
+            border: 2px solid black;
+            background-color: white;
+        }
+    </style>
+    <script>
+    $(document).ready(function() {
+        var event_number = 5;
+        drawBadge();
+
+        $("#info").keyup(liveUpdateText);
+        $("#info").change(liveUpdateText);
+
+    });
+
+    function drawBadge(){
+        var canvas = document.getElementById("badgePreview");
+        var ctx = canvas.getContext("2d");
+
+        // WHICH EVENT?
+        var event_number = 5;
+
+        // logo
+        var img=document.getElementById("shdh-square");
+        ctx.drawImage(img, 20, 20, 100, 100);
+
+        // text of logo
+        ctx.font = "60px Arial";
+        ctx.fillText("SuperHappyDevHouse Seattle " + event_number, 150, 90);
+
+        ctx.beginPath();
+        ctx.moveTo(20, 130);
+        ctx.lineTo(canvas.width - 20, 130);
+        ctx.lineWidth = 5;
+        ctx.stroke();
+    }
+
+    function updateBadgePreview(){
+        var info = $("#info").val().split("\n");
+
+        var canvas = document.getElementById("badgePreview");
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBadge();
+
+        if (info.length >= 1){
+            ctx.font = "bold 120px Arial";
+            ctx.fillText(info[0], 20, 260);
+        }
+        if (info.length >= 2){
+            ctx.font = "100px Arial";
+            ctx.fillText(info[1], 20, 360);
+        }
+        if (info.length >= 3){
+            ctx.font = "60px Arial";
+            ctx.fillText(info[2], 20, 490);
+        }
+        if (info.length >= 4){
+            ctx.font = "40px Arial";
+            ctx.fillText(info[3], 20, 550);
+        }
+    }
+
+    function liveUpdateText(){
+        setTimeout('updateBadgePreview()', 0);
+    }
+
+    function printBadge(){
+        var canvas = document.getElementById("badgePreview");
+        var dataEncode = canvas.toDataURL("image/png");
+        window.open(
+            dataEncode,
+            '_blank'
+        );
+    }
+    </script>
+</head>
+<body>
+
+<div class="ui middle aligned center aligned grid">
+    <div class="row">
+        <div class="column">
+            <img id="shdh-square" class="ui centered image" src="{{ url_for('static', filename='images/shdh-square.png') }}"/>
+            <h2>Welcome to SuperHappyDevHouse!</h2>
+        </div>
+    </div>
+    <div class="six wide column">
+        <canvas id="badgePreview" style="width: 300px; height: 180px;" width="1125px" height="600px"></canvas>
+    </div>
+    <div class="six wide column">
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <!--<div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="email" placeholder="E-mail address">
+                    </div>
+                </div>-->
+                <div class="field">
+                    <textarea id="info" rows="3" placeholder="FirstName
+LastName
+Interests"></textarea>
+                </div>
+                <div class="ui fluid large teal button" onclick="printBadge()">Print</div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>
