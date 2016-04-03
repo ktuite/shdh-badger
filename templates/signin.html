@@ -92,10 +92,27 @@
     function printBadge(){
         var canvas = document.getElementById("badgePreview");
         var dataEncode = canvas.toDataURL("image/png");
+
+        /*
         window.open(
             dataEncode,
             '_blank'
         );
+        */
+
+        $.ajax({
+            url: '/print',
+            type: 'POST',
+            data: {
+                image: dataEncode,
+                type: 'base64',
+                other: 'hello',
+            },
+            success: function(result) {
+                console.log("result", result);
+            }
+        });
+
     }
     </script>
 </head>
