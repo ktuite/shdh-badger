@@ -29,20 +29,20 @@
     </style>
     <script>
     $(document).ready(function() {
-        var event_number = 5;
-        drawBadge();
+        // WHICH EVENT?
+        var event_number = 57;
+        drawBadge(event_number);
 
         $("#info").keyup(liveUpdateText);
         $("#info").change(liveUpdateText);
 
     });
 
-    function drawBadge(){
+    function drawBadge(event_number){
         var canvas = document.getElementById("badgePreview");
         var ctx = canvas.getContext("2d");
+        var event_number = 57;
 
-        // WHICH EVENT?
-        var event_number = 5;
 
         // logo
         var img=document.getElementById("shdh-square");
@@ -50,7 +50,7 @@
 
         // text of logo
         ctx.font = "60px Arial";
-        ctx.fillText("SuperHappyDevHouse Seattle " + event_number, 150, 90);
+        ctx.fillText("SuperHappyDevHouse " + event_number, 150, 90);
 
         ctx.beginPath();
         ctx.moveTo(20, 130);
