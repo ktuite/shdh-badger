@@ -26,31 +26,30 @@
             border: 2px solid black;
             background-color: white;
         }
+        #logo-image {
+            max-height: 200px;
+        }
     </style>
     <script>
     $(document).ready(function() {
-        // WHICH EVENT?
-        var event_number = 57;
-        drawBadge(event_number);
+        drawBadge();
 
         $("#info").keyup(liveUpdateText);
         $("#info").change(liveUpdateText);
 
     });
 
-    function drawBadge(event_number){
+    function drawBadge(){
         var canvas = document.getElementById("badgePreview");
         var ctx = canvas.getContext("2d");
-        var event_number = 57;
-
 
         // logo
-        var img=document.getElementById("shdh-square");
+        var img=document.getElementById("logo-image");
         ctx.drawImage(img, 20, 20, 100, 100);
 
-        // text of logo
+        // event name for badge
         ctx.font = "60px Arial";
-        ctx.fillText("SuperHappyDevHouse " + event_number, 150, 90);
+        ctx.fillText("Women in Tech Santa Cruz", 150, 90);
 
         ctx.beginPath();
         ctx.moveTo(20, 130);
@@ -121,8 +120,8 @@
 <div class="ui middle aligned center aligned grid">
     <div class="row">
         <div class="column">
-            <img id="shdh-square" class="ui centered image" src="{{ url_for('static', filename='images/shdh-square.png') }}"/>
-            <h2>Welcome to SuperHappyDevHouse!</h2>
+            <img id="logo-image" class="ui centered image" src="{{ url_for('static', filename='images/logo-image.png') }}"/>
+            <h2>Welcome to the Women in Tech Santa Cruz Wine & Cheese Mingle!</h2>
         </div>
     </div>
     <div class="six wide column">
