@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Sign In to SHDH</title>
+    <title>Print a Badge!</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='semantic.css') }}">
 
     <script src="{{ url_for('static', filename='jquery-1.12.2.min.js') }}"></script>
@@ -34,8 +34,8 @@
     $(document).ready(function() {
         drawBadge();
 
-        $("#info").keyup(liveUpdateText);
-        $("#info").change(liveUpdateText);
+        $(".info").keyup(liveUpdateText);
+        $(".info").change(liveUpdateText);
 
     });
 
@@ -59,7 +59,10 @@
     }
 
     function updateBadgePreview(){
-        var info = $("#info").val().split("\n");
+        var info = [];
+        info[0] = $("#firstname").val();
+        info[1] = $("#lastname").val();
+        info[2] = $("#extra").val();
 
         var canvas = document.getElementById("badgePreview");
         var ctx = canvas.getContext("2d");
@@ -130,16 +133,20 @@
     <div class="six wide column">
         <form class="ui large form">
             <div class="ui stacked segment">
-                <!--<div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="text" name="email" placeholder="E-mail address">
-                    </div>
-                </div>-->
                 <div class="field">
-                    <textarea id="info" rows="3" placeholder="FirstName
-LastName
-Interests"></textarea>
+                    <div class="ui left input">
+                        <input type="text" class="info" id="firstname" placeholder="First name">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left input">
+                        <input type="text" class="info" id="lastname" placeholder="Last name">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left input">
+                        <input type="text" class="info" id="extra" placeholder="Affiliation, interests, etc!">
+                    </div>
                 </div>
                 <div class="ui fluid large teal button" onclick="printBadge()">Print</div>
             </div>
