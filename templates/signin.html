@@ -52,11 +52,13 @@
 
         // logo
         var img=document.getElementById("logo-image");
+        var event_name = $("#event_name").text();
+        console.log("event name", event_name);
         ctx.drawImage(img, 20, 20, 100, 100);
 
         // event name for badge
         ctx.font = "60px Arial";
-        ctx.fillText("Women in Tech Santa Cruz", 150, 90);
+        ctx.fillText(event_name, 150, 90);
 
         ctx.beginPath();
         ctx.moveTo(20, 130);
@@ -135,8 +137,8 @@
 <div class="ui middle aligned center aligned grid">
     <div class="row">
         <div class="column">
-            <img id="logo-image" class="ui centered image" src="{{ url_for('static', filename='images/logo-image.png') }}"/>
-            <h2>Welcome to the Women in Tech Santa Cruz Wine & Cheese Mingle!</h2>
+            <img id="logo-image" class="ui centered image" src="{{ url_for('static', filename='images/shdh-square.png') }}"/>
+            <h2>Welcome to <span id="event_name">SuperHappyDevHouse 58</span>!</h2>
         </div>
     </div>
     <div class="six wide column">

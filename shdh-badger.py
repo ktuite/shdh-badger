@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-from StringIO import StringIO
 from subprocess import Popen
 from tempfile import TemporaryFile
 from base64 import b64decode
