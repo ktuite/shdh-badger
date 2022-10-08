@@ -19,9 +19,9 @@ def print_badge():
   f = TemporaryFile(mode='w+b')
   f.write(filedata)
   f.seek(0)
-  proc = Popen("lpr", shell=True, stdin=f)
+  proc = Popen("lpr -o fit-to-page -o media=Custom.62x100mm", shell=True, stdin=f)
   proc.wait()
   return str(proc.returncode)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port='8787')
